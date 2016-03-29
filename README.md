@@ -219,7 +219,7 @@ After that you need our assets, add them to your `application.js` and `applicati
 
 The `notifly` contain the code to do all requests and notifications injection, if
 you do not use [Twitter bootstrap](http://getbootstrap.com/) you will need
-to add `//= notifly_dropdown` to the code above.
+to add `//= require notifly_dropdown` to the code above.
 
 ```css
 /*
