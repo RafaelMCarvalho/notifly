@@ -25,7 +25,7 @@ module Notifly
         def attributes
           no_attrs = [hook, :if, :unless, :mail, :then]
           attrs = instance_values.reject { |key| no_attrs.include? key.to_sym  }
-          attrs.merge({mail: get_mail_type})
+          attrs.deep_symbolize_keys.merge({mail: get_mail_type})
         end
 
         def merge(fly)
@@ -35,12 +35,12 @@ module Notifly
         end
 
         def get_mail_type
-          if mail == true
-            :always
-          elsif mail.present? and mail[:only]
-            :only
-          else
+          if mail.blank? or mail == false
             :never
+          elsif mail.is_a?(Hash) and mail[:only]
+            :only
+          elsif mail == true or mail.is_a?(Hash)
+            :always
           end
         end
       end

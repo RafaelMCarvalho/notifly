@@ -1,9 +1,11 @@
 require_relative 'options/fly'
+require_relative 'utils'
 
 module Notifly
   module Models
     module Flyable
       extend ActiveSupport::Concern
+      include Notifly::Models::Utils
 
       module ClassMethods
         attr_reader :flies, :default_fly, :flyable_callbacks
@@ -87,17 +89,6 @@ module Notifly
 
             "notifly_#{fly.hook}_#{method_name}_#{fly.object_id}"
           end
-      end
-
-      def _create_notification_for(fly)
-        new_fly = _default_fly.merge(fly)
-
-        notification = Notifly::Notification.create _get_attributes_from(new_fly)
-        _after_create_notification(notification, new_fly)
-
-      rescue => e
-        logger.error "Something goes wrong with Notifly, will ignore: #{e}"
-        raise e if not Rails.env.production?
 
       end
 
@@ -106,47 +97,6 @@ module Notifly
         kind.present? ? notifications.where(kind: kind) : notifications
       end
 
-      private
-        def _default_fly
-          self.class.default_fly || Notifly::Models::Options::Fly.new
-        end
-
-        def _get_attributes_from(fly)
-          evaluated_attributes = {}
-
-          fly.attributes.each do |key, value|
-            evaluated_attributes[key] = _eval_for(key, value)
-          end
-
-          evaluated_attributes
-        end
-
-        def _eval_for(key, value)
-          if [:template, :mail, :kind].include? key.to_sym
-            value
-          elsif value == :self
-            self
-          else
-            if value.is_a? Proc
-              instance_exec &value
-            else
-              send(value)
-            end
-          end
-        end
-
-        def _after_create_notification(notification, fly)
-          if fly.then.present?
-            block = fly.then;
-            block.parameters.present? ? instance_exec(notification, &block) : instance_exec(&block)
-          end
-
-          if fly.mail.present?
-            template = fly.mail.try(:fetch, :template) || notification.template
-            Notifly::NotificationMailer.notifly to: instance_eval(fly.receiver.to_s).email, template: template,
-              notification_id: notification.id
-          end
-        end
     end
   end
 end
