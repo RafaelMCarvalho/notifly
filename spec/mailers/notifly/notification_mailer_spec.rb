@@ -3,7 +3,7 @@ require "rails_helper"
 module Notifly
   RSpec.describe NotificationMailer, :type => :mailer do
     let(:mail) { NotificationMailer.notifly(to: dummy.email, template: notification.template,
-      notification_id: notification.id) }
+      notification_id: notification.id, subject: I18n.t("notifly.mail_subject.#{ notification.template }")) }
     let(:notification) { Notifly::Notification.create! receiver: dummy,
       mail: :always }
     let(:dummy) { DummyObject.create name: 'Dummy', email: 'dummy@test.com' }

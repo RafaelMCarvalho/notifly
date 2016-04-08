@@ -10,8 +10,8 @@ class DummyObject < ActiveRecord::Base
 
   notifly before: :destroy,  template: :destroy_dummy, mail: { only: true,
     template: :default }, unless: :is_smart?
-  notifly after:  :be_smart, template: :be_smart,      mail: { only: true,
-    template: :default }, if:     :is_smart?
+  notifly after: :be_smart, template: :be_smart, mail: { only: true,
+    template: :default }, if: :is_smart?
 
   notifly after: :buzz, if: :is_smart?
 
@@ -21,6 +21,10 @@ class DummyObject < ActiveRecord::Base
   notifly after: :test_then, then: -> { self.update name: 'name_after_then' }
   notifly after: :test_then_using_notification, kind: :blastoise,
     then: ->(n) { self.update name: n.kind }
+
+  notifly after: :test_mail,
+    mail: { template: :another_test_template,
+               subject: { variables: { name: :name, foo: 'Foo', buzz: :buzz } } }
 
   def be_smart
     self.name = 'smart'
@@ -44,6 +48,10 @@ class DummyObject < ActiveRecord::Base
   end
 
   def test_then_using_notification
+    #code
+  end
+
+  def test_mail
     #code
   end
 end

@@ -1,5 +1,6 @@
 en:
   notifly:
     mail_subject:
-      default: 'You have a new notification'
+      default: 'You have a new notification!'
       hello: 'Hello!'
+      another_test_template: '%{name}, you have a new another template notification! %{foo}%{buzz}'
