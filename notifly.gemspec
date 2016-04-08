@@ -85,8 +85,8 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, ["~> 4"])
       s.add_runtime_dependency(%q<jquery-rails>, ["< 5", ">= 3.0"])
-      s.add_runtime_dependency(%q<font-awesome-rails>, ["~> 4.2.0"])
-      s.add_runtime_dependency(%q<coffee-rails>, ["~> 4.0.0"])
+      s.add_runtime_dependency(%q<font-awesome-rails>, ["~> 4.5.0"])
+      s.add_runtime_dependency(%q<coffee-rails>, ["~> 4.1.1"])
       s.add_development_dependency(%q<pg>, [">= 0"])
       s.add_development_dependency(%q<pry-rails>, [">= 0"])
       s.add_development_dependency(%q<pry-rescue>, [">= 0"])
@@ -99,8 +99,8 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<rails>, ["~> 4"])
       s.add_dependency(%q<jquery-rails>, ["< 5", ">= 3.0"])
-      s.add_dependency(%q<font-awesome-rails>, ["~> 4.2.0"])
-      s.add_dependency(%q<coffee-rails>, ["~> 4.0.0"])
+      s.add_dependency(%q<font-awesome-rails>, ["~> 4.5.0"])
+      s.add_dependency(%q<coffee-rails>, ["~> 4.1.1"])
       s.add_dependency(%q<pg>, [">= 0"])
       s.add_dependency(%q<pry-rails>, [">= 0"])
       s.add_dependency(%q<pry-rescue>, [">= 0"])
@@ -114,8 +114,8 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<rails>, ["~> 4"])
     s.add_dependency(%q<jquery-rails>, ["< 5", ">= 3.0"])
-    s.add_dependency(%q<font-awesome-rails>, ["~> 4.2.0"])
-    s.add_dependency(%q<coffee-rails>, ["~> 4.0.0"])
+    s.add_dependency(%q<font-awesome-rails>, ["~> 4.5.0"])
+    s.add_dependency(%q<coffee-rails>, ["~> 4.1.1"])
     s.add_dependency(%q<pg>, [">= 0"])
     s.add_dependency(%q<pry-rails>, [">= 0"])
     s.add_dependency(%q<pry-rescue>, [">= 0"])
