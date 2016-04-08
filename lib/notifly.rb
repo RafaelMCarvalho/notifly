@@ -3,7 +3,6 @@ require 'notifly/railtie'
 require 'services/notification_channel'
 require 'services/action_view_helper'
 require 'font-awesome-rails'
-require 'websocket-rails'
 
 module Notifly
   # How many notifications per page.
@@ -36,3 +35,5 @@ module Notifly
     yield self
   end
 end
+
+require 'websocket-rails' if Notifly.websocket
