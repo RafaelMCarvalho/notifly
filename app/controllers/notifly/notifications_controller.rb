@@ -19,7 +19,8 @@ module Notifly
 
     def toggle_read
       @notification = Notifly::Notification.find(params[:notification_id])
-      @notification.update(read: params[:read] || !@notification.read)
+      read = params[:read].blank? || params[:read] == 'toggle' ? !@notification.read : params[:read]
+      @notification.update(read: read)
     end
 
     def seen

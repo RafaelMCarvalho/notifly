@@ -1,4 +1,4 @@
-require 'jquery-rails'
+# require 'jquery-rails'
 
 module Notifly
   class Engine < Rails::Engine
