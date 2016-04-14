@@ -14,7 +14,7 @@ module Notifly
         size = Notifly.icon_size
         fa_icon "#{icon} #{size}", id: 'notifly-icon'
       else
-        content_tag :i, class: icon, id: 'notifly-icon'
+        content_tag :i, nil, class: icon, id: 'notifly-icon'
       end
     end
   end
