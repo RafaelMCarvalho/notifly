@@ -11,5 +11,5 @@
 // about supported directives.
 //
 //= require websocket_rails/main
-//= require notifly
-//= require notifly_dropdown
+//= require notifly/notifly
+//= require notifly/notifly_dropdown

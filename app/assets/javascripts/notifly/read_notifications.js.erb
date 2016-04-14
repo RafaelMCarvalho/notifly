@@ -24,11 +24,11 @@ var _notiflyReadNotifications = function () {
 
 var _notiflyReadNotificationWithLink = function () {
   if ($('#notifly').length > 0) {
-    $('#notifly').on('click', '.notifly-notification-message a, .notifly-notification-actions .notification-toggle-read', function (e) {
+    $('.notifly-notification-message a, .notifly-notification-actions .notifly-notification-toggle-read').on('click', function (e) {
       var $el = $(this);
       var notificationId =  $el.closest('div.notifly-notification').data('id');
       var read = true;
-      if($el.hasClass('notification-toggle-read')) read='toggle';
+      if($el.hasClass('notifly-notification-toggle-read')) read='toggle';
       $.ajax({
         url: '<%= notifly.notification_toggle_read_path %>',
         data: {
