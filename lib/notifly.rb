@@ -9,6 +9,9 @@ module Notifly
   mattr_accessor :per_page
   @@per_page = 10
 
+  mattr_accessor :icon_type
+  @@icon_type = 'font-awesome'
+
   mattr_accessor :icon_size
   @@icon_size = '2x'
 
