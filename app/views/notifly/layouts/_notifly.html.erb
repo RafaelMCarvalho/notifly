@@ -20,6 +20,9 @@
 
     <div id="notifly-notifications-footer">
       <%= link_to t('notifly.view.more'), '#', id: 'notifly-more-notifications-link' %>
+      <%# if last_notification = @notifications.last.try(:id) and @user.notifly_notifications.older(than: last_notification).blank? %>
+        <%#= link_to t('notifly.view.more'), '#', id: 'notifly-more-notifications-link' %>
+      <%#- end -%>
     </div>
   </div>
 </div>

@@ -5,7 +5,6 @@ module Notifly
     def index
       @notifications = scoped_notifications
       @notifications.update_all(seen: true) if params[:mark_as_seen] == 'true'
-
       @counter = count_unseen
       @scope_param = scope_param
     end

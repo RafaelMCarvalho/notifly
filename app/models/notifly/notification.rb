@@ -14,15 +14,14 @@ module Notifly
     scope :ordered,       -> { order('notifly_notifications.created_at DESC') }
     scope :newer,         ->(than: nil) do
       return ordered if than.blank?
-
       reference = find_by(id: than)
-      ordered.where('notifly_notifications.created_at > ?', reference.created_at).where.not(id: reference)
+      ordered.where('notifly_notifications.created_at >= ?', reference.created_at)
+      .where.not(id: reference)
     end
     scope :older,         ->(than: nil) do
       reference = find_by(id: than)
-
       ordered.
-      where('notifly_notifications.created_at < ?', reference.created_at).
+      where('notifly_notifications.created_at <= ?', reference.created_at)
       where.not(id: reference)
     end
     scope :between,       ->(first, last) do

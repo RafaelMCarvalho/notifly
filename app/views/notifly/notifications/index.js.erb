@@ -1,6 +1,5 @@
 $('#notifly-notifications-content .notifly-loading').remove();
 $('#notifly-notifications-content .notifly-empty').remove();
-
 <% if @notifications.any? %>
   <% rendered_notifications = render partial: 'notifly/layouts/index',
     locals: { notifications: @notifications } %>
@@ -29,7 +28,8 @@ $('#notifly-notifications-content .notifly-empty').remove();
 
 <% end %>
 
-<% if @scope_param == 'older' and @user.notifly_notifications.older(than: last_notification).blank? %>
+//<%# if @scope_param == 'older' and last_notification.present? and @user.notifly_notifications.older(than: last_notification).blank? %>
+<% if last_notification.present? and @user.notifly_notifications.older(than: last_notification).blank? %>
   $('#notifly-more-notifications-link').remove();
 <% end %>
 
