@@ -50,11 +50,22 @@ module Notifly
           end
 
           if fly.mail.present?
-            template = fly.mail.try(:fetch, :template) || notification.template
-            subject = fly.mail.try(:fetch, :subject) || {}
+            template = fly.mail.try(:[], :template) || notification.template
+            subject = fly.mail.try(:[], :subject) || {}
             to = fly.receiver.is_a?(Symbol) ? instance_eval(fly.receiver.to_s).try(:email) : fly.receiver.try(:email)
-            Notifly::NotificationMailer.notifly to: to, template: template,
-            notification_id: notification.id, subject: _get_mail_subject(template, subject)
+
+            mail_instance = Notifly::NotificationMailer.notifly(
+              to:              to,
+              template:        template,
+              notification_id: notification.id,
+              subject:         _get_mail_subject(template, subject)
+            )
+
+            if defined? Delayed::Job or defined? Sidekiq::Worker
+              delay.mail_instance
+            else
+              mail_instance.deliver
+            end
           end
         end
 
