@@ -61,7 +61,9 @@ module Notifly
               subject:         _get_mail_subject(template, subject)
             )
 
-            if defined? Delayed::Job or defined? Sidekiq::Worker
+            if defined? Sidekiq::Worker
+              mail_instance.deliver_later
+            elsif defined? Delayed::Job
               delay.mail_instance
             else
               mail_instance.deliver
