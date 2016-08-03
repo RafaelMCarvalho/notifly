@@ -3,10 +3,16 @@ require_dependency "notifly/application_controller"
 module Notifly
   class NotificationsController < ApplicationController
     def index
-      @notifications = scoped_notifications
-      @notifications.update_all(seen: true) if params[:mark_as_seen] == 'true'
-      @counter = count_unseen
-      @scope_param = scope_param
+      if current_user.blank?
+        render 'signed_out'
+      else
+        @notifications = scoped_notifications
+        @notifications.update_all(seen: true) if params[:mark_as_seen] == 'true'
+        @counter = count_unseen
+        @scope_param = scope_param
+
+        render 'index'
+      end
     end
 
     def read
