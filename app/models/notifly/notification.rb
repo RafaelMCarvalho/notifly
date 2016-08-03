@@ -13,8 +13,7 @@ module Notifly
     scope :limited,       -> { limit(Notifly.per_page) }
     scope :ordered,       -> { order('notifly_notifications.created_at DESC') }
     scope :newer,         ->(than: nil) do
-      return ordered if than.blank?
-      reference = find_by(id: than)
+      return ordered if than.blank? || (reference = find_by(id: than)).blank?
       ordered.where('notifly_notifications.created_at > ?', reference.created_at)
       # .where.not(id: reference)
     end
